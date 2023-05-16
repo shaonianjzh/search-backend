@@ -26,7 +26,7 @@ import java.util.Collections;
 /**
  * 微信公众号相关接口
  *
- * @author shaonian
+ * @author 少年
  * 
  **/
 @RestController

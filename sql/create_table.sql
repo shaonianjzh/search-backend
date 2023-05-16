@@ -1,5 +1,5 @@
 # 建表脚本
-# @author shaonian
+# @author 少年
 #
 
 -- 创建库

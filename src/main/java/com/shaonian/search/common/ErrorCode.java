@@ -3,7 +3,7 @@ package com.shaonian.search.common;
 /**
  * 自定义错误码
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 public enum ErrorCode {

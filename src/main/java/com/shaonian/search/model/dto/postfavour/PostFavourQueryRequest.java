@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 帖子收藏查询请求
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @Data

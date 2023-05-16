@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * 用户角色枚举
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 public enum UserRoleEnum {

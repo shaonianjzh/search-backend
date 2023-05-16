@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * 用户更新请求
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @Data

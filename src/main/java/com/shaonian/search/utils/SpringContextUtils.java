@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * Spring 上下文获取工具
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @Component

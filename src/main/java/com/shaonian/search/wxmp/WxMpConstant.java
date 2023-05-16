@@ -3,7 +3,7 @@ package com.shaonian.search.wxmp;
 /**
  * 微信公众号相关常量
  *
- * @author shaonian
+ * @author 少年
  * 
  **/
 public class WxMpConstant {

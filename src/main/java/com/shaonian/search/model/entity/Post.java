@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * 帖子
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @TableName(value = "post")

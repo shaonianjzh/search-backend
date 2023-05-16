@@ -5,7 +5,7 @@ import com.shaonian.search.common.ErrorCode;
 /**
  * 抛异常工具类
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 public class ThrowUtils {

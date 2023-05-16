@@ -5,7 +5,7 @@ import com.shaonian.search.common.ErrorCode;
 /**
  * 自定义异常类
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 public class BusinessException extends RuntimeException {

@@ -32,7 +32,7 @@ import static com.shaonian.search.constant.UserConstant.USER_LOGIN_STATE;
 /**
  * 用户服务实现
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @Service

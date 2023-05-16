@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 已登录用户视图（脱敏）
  *
- * @author shaonian
+ * @author 少年
  * 
  **/
 @Data

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 /**
  * 全量同步帖子到 es
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 // todo 取消注释开启任务

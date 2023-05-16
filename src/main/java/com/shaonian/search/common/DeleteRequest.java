@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * 删除请求
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @Data

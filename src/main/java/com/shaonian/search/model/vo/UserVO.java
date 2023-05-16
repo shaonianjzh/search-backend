@@ -7,7 +7,7 @@ import lombok.Data;
 /**
  * 用户视图（脱敏）
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @Data

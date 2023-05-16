@@ -3,7 +3,7 @@ package com.shaonian.search.constant;
 /**
  * 文件常量
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 public interface FileConstant {

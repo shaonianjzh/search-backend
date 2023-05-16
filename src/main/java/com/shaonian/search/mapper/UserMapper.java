@@ -6,7 +6,7 @@ import com.shaonian.search.model.entity.User;
 /**
  * 用户数据库操作
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 public interface UserMapper extends BaseMapper<User> {

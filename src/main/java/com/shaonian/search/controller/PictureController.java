@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 图片接口
  *
- * @author shaonian
+ * @author 少年
  *
  */
 @RestController

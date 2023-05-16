@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 帖子收藏接口
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @RestController

@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 帖子视图
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @Data

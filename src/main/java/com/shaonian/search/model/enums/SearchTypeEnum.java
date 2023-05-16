@@ -7,20 +7,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 文件上传业务类型枚举
- *
  * @author 少年
- * 
  */
-public enum FileUploadBizEnum {
 
-    USER_AVATAR("用户头像", "user_avatar");
+public enum SearchTypeEnum {
+
+    POST("帖子", "post"),
+    USER("用户", "user"),
+    PICTURE("图片", "picture");
 
     private final String text;
 
     private final String value;
 
-    FileUploadBizEnum(String text, String value) {
+    SearchTypeEnum(String text, String value) {
         this.text = text;
         this.value = value;
     }
@@ -40,11 +40,11 @@ public enum FileUploadBizEnum {
      * @param value
      * @return
      */
-    public static FileUploadBizEnum getEnumByValue(String value) {
+    public static SearchTypeEnum getEnumByValue(String value) {
         if (ObjectUtils.isEmpty(value)) {
             return null;
         }
-        for (FileUploadBizEnum anEnum : FileUploadBizEnum.values()) {
+        for (SearchTypeEnum anEnum : SearchTypeEnum.values()) {
             if (anEnum.value.equals(value)) {
                 return anEnum;
             }

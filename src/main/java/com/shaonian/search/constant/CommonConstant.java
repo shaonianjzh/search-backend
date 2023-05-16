@@ -3,7 +3,7 @@ package com.shaonian.search.constant;
 /**
  * 通用常量
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 public interface CommonConstant {

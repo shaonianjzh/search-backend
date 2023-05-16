@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 /**
  * 帖子点赞服务测试
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @SpringBootTest

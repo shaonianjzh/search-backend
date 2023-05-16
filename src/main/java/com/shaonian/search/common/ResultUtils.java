@@ -3,7 +3,7 @@ package com.shaonian.search.common;
 /**
  * 返回工具类
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 public class ResultUtils {

@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 权限校验
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @Target(ElementType.METHOD)

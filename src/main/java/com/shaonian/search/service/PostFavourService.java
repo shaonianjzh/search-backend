@@ -11,7 +11,7 @@ import com.shaonian.search.model.entity.User;
 /**
  * 帖子收藏服务
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 public interface PostFavourService extends IService<PostFavour> {

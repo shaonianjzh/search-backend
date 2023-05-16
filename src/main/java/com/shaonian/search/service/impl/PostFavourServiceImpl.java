@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 /**
  * 帖子收藏服务实现
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @Service

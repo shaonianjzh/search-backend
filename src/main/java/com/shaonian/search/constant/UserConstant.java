@@ -3,7 +3,7 @@ package com.shaonian.search.constant;
 /**
  * 用户常量
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 public interface UserConstant {

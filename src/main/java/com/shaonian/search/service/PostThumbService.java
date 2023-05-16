@@ -7,7 +7,7 @@ import com.shaonian.search.model.entity.User;
 /**
  * 帖子点赞服务
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 public interface PostThumbService extends IService<PostThumb> {

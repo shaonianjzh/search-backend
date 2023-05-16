@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * 帖子点赞
  *
- * @author shaonian
+ * @author 少年
  * 
  */
 @TableName(value = "post_thumb")
