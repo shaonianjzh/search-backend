@@ -7,6 +7,7 @@ import com.shaonian.search.model.entity.Post;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
  * 
  */
 // todo 取消注释开启任务
-//@Component
+@Component
 @Slf4j
 public class IncSyncPostToEs {
 
@@ -33,7 +34,7 @@ public class IncSyncPostToEs {
     /**
      * 每分钟执行一次
      */
-    @Scheduled(fixedRate = 60 * 1000)
+    @Scheduled(fixedRate = 60*1000)
     public void run() {
         // 查询近 5 分钟内的数据
         Date fiveMinutesAgoDate = new Date(new Date().getTime() - 5 * 60 * 1000L);

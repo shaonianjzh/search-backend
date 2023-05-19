@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * @author 少年
+ */
 @Component
 @Slf4j
 public class SearchFacade {

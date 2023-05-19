@@ -1,6 +1,7 @@
 package com.shaonian.search.datasource;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.shaonian.search.model.dto.post.PostQueryRequest;
+import com.shaonian.search.model.entity.Post;
 import com.shaonian.search.model.vo.PostVO;
 import com.shaonian.search.service.PostService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,8 @@ public class PostDataSource implements DataSource<PostVO> {
         postQueryRequest.setSearchText(searchText);
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
-        return postService.listPostVoPage(postQueryRequest,request);
+        Page<Post> postPage = postService.searchFromEs(postQueryRequest);
+        return postService.getPostVOPage(postPage,request);
     }
 }
 

@@ -29,12 +29,6 @@
       "tags": {
         "type": "keyword"
       },
-      "thumbNum": {
-        "type": "long"
-      },
-      "favourNum": {
-        "type": "long"
-      },
       "userId": {
         "type": "keyword"
       },

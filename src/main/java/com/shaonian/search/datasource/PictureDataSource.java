@@ -28,14 +28,14 @@ public class PictureDataSource implements DataSource<Picture>{
 
         long current = (pageNum-1)*pageSize;
 
-        String url = String.format("https://www.bing.com/images/search?q=%s&form&first=%s",searchText,current);
+        String url = String.format("https://www.bing.com/images/search?q=%s&first=%s",searchText,current);
         Document doc = null;
         try {
             doc = Jsoup.connect(url).get();
         } catch (IOException e) {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR,"数据获取异常");
         }
-        Elements elements = doc.select(".iuscp.varh.isv");
+        Elements elements = doc.select(".iuscp.isv");
         List<Picture> pictureList = new ArrayList<>();
         for(Element element:elements){
             //图片地址
