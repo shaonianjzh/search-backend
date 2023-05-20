@@ -21,39 +21,39 @@ import java.util.Map;
  */
 
 @Service
-public class PictureDataSource implements DataSource<Picture>{
+public class PictureDataSource implements DataSource<Picture> {
 
     @Override
-    public Page<Picture> doSearch(String searchText, long pageNum, long pageSize){
+    public Page<Picture> doSearch(String searchText, long pageNum, long pageSize) {
 
-        long current = (pageNum-1)*pageSize;
+        long current = (pageNum - 1) * pageSize;
 
-        String url = String.format("https://www.bing.com/images/search?q=%s&first=%s",searchText,current);
+        String url = String.format("https://www.bing.com/images/search?q=%s&first=%s", searchText, current);
         Document doc = null;
         try {
             doc = Jsoup.connect(url).get();
         } catch (IOException e) {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR,"数据获取异常");
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据获取异常");
         }
         Elements elements = doc.select(".iuscp.isv");
         List<Picture> pictureList = new ArrayList<>();
-        for(Element element:elements){
+        for (Element element : elements) {
             //图片地址
             Picture picture = new Picture();
             String m = element.select(".iusc").get(0).attr("m");
             Map map = JSONUtil.toBean(m, Map.class);
-            String mUrl =(String) map.get("murl");
+            String mUrl = (String) map.get("murl");
 
             //图片标题
             String title = element.select(".inflnk").get(0).attr("aria-label");
             picture.setTitle(title);
             picture.setUrl(mUrl);
             pictureList.add(picture);
-            if(pictureList.size()>=pageSize){
+            if (pictureList.size() >= pageSize) {
                 break;
             }
         }
-        Page<Picture> page = new Page(pageNum,pageSize);
+        Page<Picture> page = new Page(pageNum, pageSize);
         page.setRecords(pictureList);
         return page;
     }

@@ -8,6 +8,7 @@ import com.shaonian.search.model.entity.Post;
 import com.shaonian.search.service.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.Map;
  * @author 少年
  */
 @Slf4j
-//@Component
+@Component
 public class FetchInitPostList implements CommandLineRunner {
 
     @Resource

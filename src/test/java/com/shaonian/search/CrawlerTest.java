@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.net.HttpCookie;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,15 @@ public class CrawlerTest {
 
     @Resource
     private PostService postService;
+
+
+
+    @Test
+    void testFetchVideo(){
+        String url = "https://www.bilibili.com/";
+        List<HttpCookie> cookieList = HttpRequest.get(url).execute().getCookies();
+        System.out.println(cookieList);
+    }
 
     @Test
     void testFetchPicture() throws IOException {
