@@ -20,5 +20,5 @@ spring:
   # todo 需替换配置
   elasticsearch:
     uris: http://localhost:9200
-    username: elastic
+    username:
     password:

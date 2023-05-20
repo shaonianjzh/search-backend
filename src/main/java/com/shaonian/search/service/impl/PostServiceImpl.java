@@ -27,6 +27,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
@@ -144,6 +145,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         long pageSize = postQueryRequest.getPageSize();
         String sortField = postQueryRequest.getSortField();
         String sortOrder = postQueryRequest.getSortOrder();
+
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         // 过滤
         boolQueryBuilder.filter(QueryBuilders.termQuery("isDelete", 0));
@@ -196,8 +198,16 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         }
         // 分页
         PageRequest pageRequest = PageRequest.of((int) current, (int) pageSize);
+
+        //高亮显示
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.field("content");
+        highlightBuilder.field("title");
+        highlightBuilder.preTags("<font color='red'>");
+        highlightBuilder.postTags("</font>");
         // 构造查询
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder)
+                .withHighlightBuilder(highlightBuilder)
                 .withPageable(pageRequest).withSorts(sortBuilder).build();
         SearchHits<PostEsDTO> searchHits = elasticsearchRestTemplate.search(searchQuery, PostEsDTO.class);
         Page<Post> page = new Page<>();
@@ -208,12 +218,21 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
             List<SearchHit<PostEsDTO>> searchHitList = searchHits.getSearchHits();
             List<Long> postIdList = searchHitList.stream().map(searchHit -> searchHit.getContent().getId())
                     .collect(Collectors.toList());
+
+            Map<String, List<SearchHit<PostEsDTO>>> highLightMap = searchHitList.stream().collect(Collectors.groupingBy(SearchHit::getId));
+
+
+
             List<Post> postList = baseMapper.selectBatchIds(postIdList);
             if (postList != null) {
                 Map<Long, List<Post>> idPostMap = postList.stream().collect(Collectors.groupingBy(Post::getId));
                 postIdList.forEach(postId -> {
                     if (idPostMap.containsKey(postId)) {
-                        resourceList.add(idPostMap.get(postId).get(0));
+                        Post post = idPostMap.get(postId).get(0);
+                        SearchHit<PostEsDTO> postEsDTOSearchHit = highLightMap.get(String.valueOf(postId)).get(0);
+                        post.setTitle(postEsDTOSearchHit==null?null:postEsDTOSearchHit.getHighlightField("title").get(0));
+                        post.setContent(postEsDTOSearchHit==null?null:postEsDTOSearchHit.getHighlightField("content").get(0));
+                        resourceList.add(post);
                     } else {
                         // 从 es 清空 db 已物理删除的数据
                         String delete = elasticsearchRestTemplate.delete(String.valueOf(postId), PostEsDTO.class);
@@ -222,6 +241,8 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
                 });
             }
         }
+
+
         page.setRecords(resourceList);
         return page;
     }
