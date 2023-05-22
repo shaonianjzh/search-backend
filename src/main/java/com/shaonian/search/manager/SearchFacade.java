@@ -12,6 +12,7 @@ import com.shaonian.search.model.enums.SearchTypeEnum;
 import com.shaonian.search.model.vo.PostVO;
 import com.shaonian.search.model.vo.SearchVO;
 import com.shaonian.search.model.vo.UserVO;
+import com.shaonian.search.model.vo.VideoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -40,6 +41,9 @@ public class SearchFacade {
     @Resource
     private DataSourceRegistry dataSourceRegistry;
 
+    @Resource
+    private VideoDataSource videoDataSource;
+
 
     public SearchVO searchAll(SearchRequest searchRequest, HttpServletRequest request){
         String type = searchRequest.getType();
@@ -64,6 +68,9 @@ public class SearchFacade {
                 PostQueryRequest postQueryRequest = new PostQueryRequest();
                 postQueryRequest.setSearchText(searchText);
                 return postDataSource.doSearch(searchText,current,pageSize);
+            });
+            CompletableFuture<Page<VideoVo>> videoTask = CompletableFuture.supplyAsync(() -> {
+                return videoDataSource.doSearch(searchText,current,pageSize);
             });
 
             CompletableFuture.allOf(pictureTask, userTask, pictureTask).join();

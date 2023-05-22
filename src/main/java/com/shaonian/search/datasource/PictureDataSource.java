@@ -2,6 +2,7 @@ package com.shaonian.search.datasource;
 
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.rholder.retry.Retryer;
 import com.shaonian.search.common.ErrorCode;
 import com.shaonian.search.exception.BusinessException;
 import com.shaonian.search.model.entity.Picture;
@@ -11,7 +12,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,9 @@ import java.util.Map;
 @Service
 public class PictureDataSource implements DataSource<Picture> {
 
+    @Resource
+    private Retryer<Document> retryer;
+
     @Override
     public Page<Picture> doSearch(String searchText, long pageNum, long pageSize) {
 
@@ -31,10 +35,11 @@ public class PictureDataSource implements DataSource<Picture> {
         String url = String.format("https://www.bing.com/images/search?q=%s&first=%s", searchText, current);
         Document doc = null;
         try {
-            doc = Jsoup.connect(url).get();
-        } catch (IOException e) {
+            doc = retryer.call(() -> Jsoup.connect(url).get());
+        } catch (Exception e) {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据获取异常");
         }
+
         Elements elements = doc.select(".iuscp.isv");
         List<Picture> pictureList = new ArrayList<>();
         for (Element element : elements) {

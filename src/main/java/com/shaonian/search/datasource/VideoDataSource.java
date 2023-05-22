@@ -5,10 +5,14 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.rholder.retry.Retryer;
+import com.shaonian.search.common.ErrorCode;
+import com.shaonian.search.exception.BusinessException;
 import com.shaonian.search.model.vo.VideoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.net.HttpCookie;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,15 +25,25 @@ import java.util.Map;
 @Slf4j
 public class VideoDataSource implements DataSource{
 
+    @Resource
+    private Retryer<String> retryer;
+
     @Override
     public Page<VideoVo> doSearch(String searchText, long pageNum, long pageSize) {
 
         String url1 = "https://www.bilibili.com/";
         String url2 = String.format("https://api.bilibili.com/x/web-interface/search/type?search_type=video&keyword=%s",searchText);
         HttpCookie cookie = HttpRequest.get(url1).execute().getCookie("buvid3");
-        String body = HttpRequest.get(url2)
-                .cookie(cookie)
-                .execute().body();
+
+        String body = null;
+        try {
+            body = retryer.call(() -> HttpRequest.get(url2)
+                    .cookie(cookie)
+                    .execute().body());
+        } catch (Exception e) {
+           throw new BusinessException(ErrorCode.SYSTEM_ERROR,"重试失败");
+        }
+
         Map map = JSONUtil.toBean(body, Map.class);
         Map data = (Map)map.get("data");
         JSONArray videoList = (JSONArray) data.get("result");
