@@ -3,6 +3,7 @@ package com.shaonian.search.model.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -20,6 +21,7 @@ public class Post implements Serializable {
      * id
      */
     @TableId(type = IdType.ASSIGN_ID)
+    @Id
     private Long id;
 
     /**

@@ -30,7 +30,7 @@ public class RetryerConfig {
                 // 发生运行时异常则重试
                 .retryIfRuntimeException()
                 // 等待
-                .withWaitStrategy(WaitStrategies.incrementingWait(10, TimeUnit.SECONDS, 10, TimeUnit.SECONDS))
+                .withWaitStrategy(WaitStrategies.incrementingWait(500, TimeUnit.MILLISECONDS, 200, TimeUnit.MILLISECONDS))
                 // 允许执行4次（首次执行 + 最多重试3次）
                 .withStopStrategy(StopStrategies.stopAfterAttempt(4))
                 .build();

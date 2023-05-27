@@ -1,7 +1,7 @@
 package com.shaonian.search.wxmp;
 
 import com.shaonian.search.wxmp.handler.EventHandler;
-import com.shaonian.search.wxmp.handler.MessageHandler;
+import com.shaonian.search.wxmp.handler.WxMessageHandler;
 import com.shaonian.search.wxmp.handler.SubscribeHandler;
 import javax.annotation.Resource;
 import me.chanjar.weixin.common.api.WxConsts.EventType;
@@ -27,7 +27,7 @@ public class WxMpMsgRouter {
     private EventHandler eventHandler;
 
     @Resource
-    private MessageHandler messageHandler;
+    private WxMessageHandler wxMessageHandler;
 
     @Resource
     private SubscribeHandler subscribeHandler;
@@ -39,7 +39,7 @@ public class WxMpMsgRouter {
         router.rule()
                 .async(false)
                 .msgType(XmlMsgType.TEXT)
-                .handler(messageHandler)
+                .handler(wxMessageHandler)
                 .end();
         // 关注
         router.rule()

@@ -3,7 +3,7 @@ spring:
     name: search-project
   # 默认 dev 环境
   profiles:
-    active: prod
+    active: test
   # 支持 swagger3
   mvc:
     pathmatch:
