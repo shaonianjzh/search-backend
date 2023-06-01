@@ -22,3 +22,6 @@ spring:
     uris: http://localhost:9200
     username:
     password:
+canal:
+  destination: example
+  server: 127.0.0.1:11111
